@@ -1,12 +1,13 @@
-import React from "react";
+import { useEffect } from "react";
 import "./SignIn.css";
 import * as yup from "yup";
+import api from "axiosConfig";
 import { logo } from "./logo";
 import { useForm } from "react-hook-form";
+import { loginAction } from "store/actions";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "axiosConfig";
 import { useSelector, useDispatch } from "react-redux";
-import { loginAction, logoutAction } from "store/actions";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -15,6 +16,9 @@ const schema = yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  console.log(auth, "auth");
   const {
     register,
     handleSubmit,
@@ -24,6 +28,7 @@ const SignIn = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
   const onSubmitHandler = async (data) => {
     try {
       const response = await api.post("/api/users/login", data);
@@ -33,7 +38,11 @@ const SignIn = () => {
       setError("catch", error.response.data);
     }
   };
-  console.log(errors?.catch?.message, "errors");
+
+  useEffect(() => {
+    if (auth.isAuthenticated) navigate("/dashboard");
+  }, [auth, navigate]);
+
   return (
     <div>
       <div className="container-custom mr-0 pr-0">
@@ -47,7 +56,7 @@ const SignIn = () => {
                 <div className="col-md-6">
                   <form onSubmit={handleSubmit(onSubmitHandler)}>
                     <div className="form-group mt-2">
-                      <label for="email" className="label-style mb-0">
+                      <label htmlFor="email" className="label-style mb-0">
                         Email
                       </label>
                       <div>
@@ -63,7 +72,7 @@ const SignIn = () => {
                       </div>
                     </div>
                     <div className="form-group mt-1">
-                      <label for="password" className="label-style mb-0">
+                      <label htmlFor="password" className="label-style mb-0">
                         Password
                       </label>
                       <div>
