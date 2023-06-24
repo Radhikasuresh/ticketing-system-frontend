@@ -5,6 +5,8 @@ import { logo } from "./logo";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "axiosConfig";
+import { useSelector, useDispatch } from "react-redux";
+import { loginAction, logoutAction } from "store/actions";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -12,6 +14,7 @@ const schema = yup.object().shape({
 });
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -24,7 +27,7 @@ const SignIn = () => {
   const onSubmitHandler = async (data) => {
     try {
       const response = await api.post("/api/users/login", data);
-      console.log(response, "success");
+      dispatch(loginAction(response.data));
       reset();
     } catch (error) {
       setError("catch", error.response.data);
