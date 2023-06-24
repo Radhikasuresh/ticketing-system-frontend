@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const { auth } = useSelector((state) => state);
+  const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
