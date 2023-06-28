@@ -103,7 +103,10 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <button class="Buttons_nano__accept__2ILBE">
-                      <img src="/Icons/tick.svg" alt="toggle hide/view" />
+                      <img
+                        src="https://www.zenclass.in/Icons/tick.svg"
+                        alt="toggle hide/view"
+                      />
                     </button>
                   </div>
                   <div class="d-flex justify-content-between">

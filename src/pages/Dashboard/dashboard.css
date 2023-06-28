@@ -187,3 +187,200 @@ font-size: 16px;
      left: 0px; 
      transform: translate3d(-103px, 46px, 0px);
 }
+
+img, svg {
+    vertical-align: middle;
+  }
+  
+  .Queries_sq__list__tile__head__169P7 {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .Queries_sq__list__item__FVhGh {
+    min-height: 96px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 8px;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .Queries_sq__tile__title__357Tm {
+    font-weight: 500;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .Queries_category__tag__2Znr0 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 12px;
+    height: 24px;
+    background: #f7f5fc;
+    border-radius: 12px;
+    color: #b182ff;
+    width: -webkit-max-content;
+    width: max-content;
+  }
+  
+  .Queries_timestamp__1FG2g {
+    color: #7e8e9f;
+    font-size: 14px;
+  }
+  
+  .Queries_query__status__btn__cont__1Gdq0 {
+    width: -webkit-fit-content!important;
+    width: -moz-fit-content!important;
+    width: fit-content!important;
+  }
+  
+  .Queries_query__status__unassigned__2I66S {
+    background-color: #d3f6ff;
+    color: #0082ac;
+  }
+  
+  .Queries_query__status__btn__mKjvg {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    height: 32px;
+    font-weight: 700;
+    font-size: 12px;
+    width: -webkit-max-content;
+    width: max-content;
+  }
+  
+  .Buttons_nano__accept__2ILBE {
+    box-sizing: border-box;
+    padding: 0;
+    border: 1px solid #06aa44;
+    border-radius: 8px;
+    margin: 0 0 0 8px;
+  }
+  
+  .Buttons_nano__accept__2ILBE , .Buttons_toggleHide__1NOrB {
+    min-width: 32px;
+    height: 32px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Queries_sq__single__item__3QDru {
+    width: 42%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.Queries_recent__title___0YjV {
+    display: flex;
+    justify-content: center;
+    color: #4b0dba;
+    margin-bottom: 8px;
+}
+
+.Queries_sq__title__border__3EQUd {
+    display: flex;
+    padding: 24px 0 28px;
+    border-bottom: 1px solid #dedede;
+}
+
+.Queries_sq__tile__title__357Tm {
+    font-weight: 500;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
+
+.Queries_query__status__btn__cont__1Gdq0 {
+    width: -webkit-fit-content!important;
+    width: -moz-fit-content!important;
+    width: fit-content!important;
+}
+
+.Queries_query__status__unassigned__2I66S {
+    background-color: #d3f6ff;
+    color: #0082ac;
+}
+
+.Queries_query__status__btn__mKjvg {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    height: 32px;
+    font-weight: 700;
+    font-size: 12px;
+    width: -webkit-max-content;
+    width: max-content;
+}
+
+.Queries_queries__data__rowFlex__K0khZ, .Queries_queries__data__studentData__8ZIt1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+    gap: 16px;
+    padding: 24px 0;
+}
+
+.Queries_queries__studCont__3fLlU {
+    display: flex;
+    flex-direction: column;
+}
+
+.Queries_query__grey__text__8FJZa {
+    color: #7e8e9f;
+}
+  
+.Queries_grid__col2__3UV94 {
+    grid-column: 1/3;
+    white-space: pre-wrap;
+}
+
+.Queries_queries__studCont__3fLlU {
+    display: flex;
+    flex-direction: column;
+}
+
+.Queries_go__to__btn__iNgHn {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 64px 0;
+}
+
+.modal__btn__continue {
+    background-color: #4b0dba;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    height: 48px;
+    border: 1px solid #4b0dba;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    border-radius: 8px;
+    margin: 0;
+}
+      
+  
+  
