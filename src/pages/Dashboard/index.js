@@ -1,12 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./dashboard.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAction } from "store/actions";
+import api from "axiosConfig";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [openPopover, setOpenPopover] = useState(false);
+  const [tickets, setTickets] = useState([]);
+  const [selectedTicket, setSelectedTicket] = useState(tickets[0]);
+
+  useEffect(() => {
+    const fetchTicket = async () => {
+      try {
+        const response = await api.get("/api/tickets/getUserTickets", {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+          },
+        });
+        setTickets(response.data.tickets);
+        setSelectedTicket(response.data.tickets[0]);
+      } catch (error) {
+        console.error("catch", error.response.data);
+      }
+    };
+    fetchTicket();
+  }, [user.token]);
+
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+    const convertedDate = date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    return convertedDate;
+  };
 
   return (
     <div>
@@ -32,7 +64,7 @@ const Dashboard = () => {
                 />
               </span>
               <div
-                tabindex="-1"
+                tabIndex="-1"
                 role="menu"
                 aria-hidden="false"
                 className={`dropdownMenu dropdown-menu  dropdown-custom ${
@@ -42,17 +74,17 @@ const Dashboard = () => {
               >
                 {/* <button
                   type="button"
-                  tabindex="0"
+                  tabIndex="0"
                   role="menuitem"
-                  class="dropdownItem dropdown-item"
+                  className="dropdownItem dropdown-item"
                 >
                   Profile
                 </button> */}
                 <button
                   type="button"
-                  tabindex="0"
+                  tabIndex="0"
                   role="menuitem"
-                  class="dropdownItem dropdown-item"
+                  className="dropdownItem dropdown-item"
                   onClick={() => dispatch(logoutAction())}
                 >
                   Logout
@@ -62,12 +94,12 @@ const Dashboard = () => {
           </div>
         </div>
       </nav>
-      <div class="Body_body__box__Y49P-">
-        <div class="Body_body__wrapper__6cj6C">
+      <div className="Body_body__box__Y49P-">
+        <div className="Body_body__wrapper__6cj6C">
           {/* button -> create query */}
-          <div class="Navbar_navbar__container__3Q3Zl">
-            <div class="sc-jTrPJq gFWlwy">
-              <button class="NavButtons_add__button__q_2E5">
+          <div className="Navbar_navbar__container__3Q3Zl">
+            <div className="sc-jTrPJq gFWlwy">
+              <button className="NavButtons_add__button__q_2E5">
                 <img
                   src="https://www.zenclass.in/Icons/plus.svg"
                   alt="add/plus"
@@ -80,84 +112,96 @@ const Dashboard = () => {
               <input
                 type="text"
                 name="searchBox"
-                class="Search_search__box__1WtVJ"
-                value=""
+                className="Search_search__box__1WtVJ"
               />
             </div>
           </div>
 
           {/*  */}
 
-          <div class="Body_body__content__1jKgz">
-            <div class="Queries_sq__home__cont__2LKRX ">
+          <div className="Body_body__content__1jKgz">
+            <div className="Queries_sq__home__cont__2LKRX ">
               {/* left */}
-              <div class="Queries_sq__list__1nUJ9">
-                <div class="Queries_sq__list__item__FVhGh">
-                  <div class="Queries_sq__list__tile__head__169P7">
-                    <span class="Queries_sq__tile__title__357Tm">
-                      QN41659 - doubt on capstone project
-                    </span>
-                    <div class="Queries_query__status__btn__cont__1Gdq0">
-                      <div class="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
-                        Unassigned
+              <div className="Queries_sq__list__1nUJ9">
+                {tickets?.length &&
+                  tickets.map((ticket) => (
+                    <div
+                      className="Queries_sq__list__item__FVhGh"
+                      key={ticket._id}
+                    >
+                      <div className="Queries_sq__list__tile__head__169P7">
+                        <span className="Queries_sq__tile__title__357Tm">
+                          {ticket.title}
+                        </span>
+                        <div className="Queries_query__status__btn__cont__1Gdq0">
+                          <div className="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
+                            {ticket.status}
+                          </div>
+                        </div>
+                        <button className="Buttons_nano__accept__2ILBE">
+                          <img
+                            src="https://www.zenclass.in/Icons/tick.svg"
+                            alt="toggle hide/view"
+                          />
+                        </button>
+                      </div>
+                      <div className="d-flex justify-content-between">
+                        <span className="Queries_category__tag__2Znr0">
+                          {ticket.description}
+                        </span>
+                        <span className="Queries_timestamp__1FG2g">
+                          {formatDate(ticket.createdAt)}
+                        </span>
                       </div>
                     </div>
-                    <button class="Buttons_nano__accept__2ILBE">
-                      <img
-                        src="https://www.zenclass.in/Icons/tick.svg"
-                        alt="toggle hide/view"
-                      />
-                    </button>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <span class="Queries_category__tag__2Znr0">
-                      Zen-Class Doubt
-                    </span>
-                    <span class="Queries_timestamp__1FG2g">
-                      23/06/2023, 12:04 PM
-                    </span>
-                  </div>
-                </div>
+                  ))}
               </div>
+
               {/* right */}
-              <div class="Queries_sq__single__item__3QDru">
-                <span class="Queries_recent__title___0YjV">Recent query</span>
-                <span>
-                  <span class="Queries_sq__title__border__3EQUd">
-                    <span class="Queries_sq__tile__title__357Tm">
-                      QN41659 - doubt on capstone project
-                    </span>
-                    <div class="Queries_query__status__btn__cont__1Gdq0">
-                      <div class="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
-                        Unassigned
+              {selectedTicket && (
+                <div className="Queries_sq__single__item__3QDru">
+                  <span className="Queries_recent__title___0YjV">
+                    Recent query
+                  </span>
+                  <span>
+                    <span className="Queries_sq__title__border__3EQUd">
+                      <span className="Queries_sq__tile__title__357Tm">
+                        {selectedTicket.title}
+                      </span>
+                      <div className="Queries_query__status__btn__cont__1Gdq0">
+                        <div className="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
+                          {selectedTicket.status}
+                        </div>
                       </div>
+                    </span>
+                    <div className="Queries_queries__data__rowFlex__K0khZ">
+                      <div className="Queries_queries__studCont__3fLlU">
+                        <span className="Queries_query__grey__text__8FJZa">
+                          Created at:
+                        </span>
+                        <span>{formatDate(selectedTicket.createdAt)}</span>
+                      </div>
+                      <div className="Queries_queries__studCont__3fLlU">
+                        <span className="Queries_query__grey__text__8FJZa">
+                          Assigned to:
+                        </span>
+                        <span>-</span>
+                      </div>
+                      <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                        <span className="Queries_query__grey__text__8FJZa">
+                          Description:
+                        </span>
+                        <span>{selectedTicket.description}</span>
+                      </div>
+                    </div>
+                    <div className="Queries_go__to__btn__iNgHn">
+                      <button className="modal__btn__continue">
+                        Go to query
+                      </button>
                     </div>
                   </span>
-                  <div class="Queries_queries__data__rowFlex__K0khZ">
-                    <div class="Queries_queries__studCont__3fLlU">
-                      <span class="Queries_query__grey__text__8FJZa">
-                        Created at:
-                      </span>
-                      <span>23/06/2023, 12:04 PM</span>
-                    </div>
-                    <div class="Queries_queries__studCont__3fLlU">
-                      <span class="Queries_query__grey__text__8FJZa">
-                        Assigned to:
-                      </span>
-                      <span>-</span>
-                    </div>
-                    <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                      <span class="Queries_query__grey__text__8FJZa">
-                        Description:
-                      </span>
-                      <span>doubt on capstone project</span>
-                    </div>
-                  </div>
-                  <div class="Queries_go__to__btn__iNgHn">
-                    <button class="modal__btn__continue">Go to query</button>
-                  </div>
-                </span>
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

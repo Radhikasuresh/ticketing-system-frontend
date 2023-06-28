@@ -115,6 +115,13 @@ font-size: 16px;
     max-height: calc(100vh - 160px);
 }
 
+.Queries_sq__single__item__3QDru {
+    width: 42%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
 .Queries_sq__list__1nUJ9 {
     width: 58%;
     height: 100%;

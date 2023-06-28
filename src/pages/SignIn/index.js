@@ -88,7 +88,7 @@ const SignIn = () => {
                       <p className="text-danger">{errors.password?.message}</p>
                     </div>
                     {errors?.catch?.message && (
-                      <div class="alert alert-warning" role="alert">
+                      <div className="alert alert-warning" role="alert">
                         <span>Wrong Password</span>
                       </div>
                     )}
