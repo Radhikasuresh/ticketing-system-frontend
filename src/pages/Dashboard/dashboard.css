@@ -31,8 +31,8 @@ nav {
 }
 
 .Body_body__box__Y49P- {
-    margin: 96px 0 0 72px;
-    width: calc(100vw - 72px);
+    margin: 96px 0 0 0;
+    /* width: calc(100vw - 72px); */
     min-height: calc(100vh - 96px);
 }
 
@@ -73,12 +73,6 @@ font-size: 16px;
 .Body_body__wrapper__6cj6C {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 96px);
-}
-
-.Body_body__box__Y49P- {
-    margin: 96px 0 0 72px;
-    width: calc(100vw - 72px);
     min-height: calc(100vh - 96px);
 }
 
