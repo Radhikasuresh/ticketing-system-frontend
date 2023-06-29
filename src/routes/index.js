@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./protectedRoute";
 const SignIn = lazy(() => import("pages/SignIn"));
 const Dashboard = lazy(() => import("pages/Dashboard"));
+const MyQueries = lazy(() => import("pages/MyQueries"));
+const CreateQuery = lazy(() => import("pages/CreateQuery"));
 
 const AppRouter = () => {
   return (
@@ -13,7 +15,19 @@ const AppRouter = () => {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Dashboard title="My Queries">
+                <MyQueries />
+              </Dashboard>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-query"
+          element={
+            <ProtectedRoute>
+              <Dashboard title="Create Query">
+                <CreateQuery />
+              </Dashboard>
             </ProtectedRoute>
           }
         />
