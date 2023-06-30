@@ -7,6 +7,7 @@ const MyQueries = lazy(() => import("pages/MyQueries"));
 const CreateQuery = lazy(() => import("pages/CreateQuery"));
 const AuthLayout = lazy(() => import("Layouts/AuthLayout"));
 const ForgotPassword = lazy(() => import("pages/ForgotPassword"));
+const ViewQuery = lazy(() => import("pages/ViewQuery"));
 
 const AppRouter = () => {
   return (
@@ -29,7 +30,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/dashboard"
+          path="/queries"
           element={
             <ProtectedRoute>
               <MainLayout title="My Queries">
@@ -38,6 +39,17 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/queries/:id"
+          element={
+            <ProtectedRoute>
+              <MainLayout title="Query">
+                <ViewQuery />
+              </MainLayout>
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/create-query"
           element={

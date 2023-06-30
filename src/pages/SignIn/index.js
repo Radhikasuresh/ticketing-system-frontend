@@ -39,7 +39,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (auth.isAuthenticated) navigate("/dashboard");
+    if (auth.isAuthenticated) navigate("/queries");
   }, [auth, navigate]);
 
   return (

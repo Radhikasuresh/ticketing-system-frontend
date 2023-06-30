@@ -56,7 +56,7 @@ const CreateQuery = () => {
       });
       if (response) {
         reset();
-        navigate("/dashboard");
+        navigate("/queries");
       }
     } catch (error) {
       setError("catch", error.response.data);
@@ -69,7 +69,7 @@ const CreateQuery = () => {
         {/* button -> create query */}
         <div className="Navbar_navbar__container__3Q3Zl">
           <div className="sc-jTrPJq gFWlwy">
-            <Link to="/dashboard">
+            <Link to="/queries">
               <button className="NavButtons_add__button__q_2E5">
                 <img
                   src="https://www.zenclass.in/Icons/backArrow.svg"

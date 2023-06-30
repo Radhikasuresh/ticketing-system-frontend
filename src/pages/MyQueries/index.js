@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import api from "axiosConfig";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyQueries = () => {
   const user = useSelector((state) => state.auth.user);
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(tickets[0]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTicket = async () => {
@@ -70,6 +71,7 @@ const MyQueries = () => {
                     <div
                       className="Queries_sq__list__item__FVhGh"
                       key={ticket._id}
+                      onClick={() => navigate(`/queries/${ticket._id}`)}
                     >
                       <div className="Queries_sq__list__tile__head__169P7">
                         <span className="Queries_sq__tile__title__357Tm">
@@ -138,7 +140,10 @@ const MyQueries = () => {
                     </div>
                   </div>
                   <div className="Queries_go__to__btn__iNgHn">
-                    <button className="modal__btn__continue">
+                    <button
+                      className="modal__btn__continue"
+                      onClick={() => navigate(`/queries/${selectedTicket._id}`)}
+                    >
                       Go to query
                     </button>
                   </div>
