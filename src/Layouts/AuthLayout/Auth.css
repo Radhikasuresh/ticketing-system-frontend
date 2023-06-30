@@ -1,19 +1,19 @@
 .container-custom {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .logo {
-    width: 128px;
+  width: 128px;
 }
 
 .img-class {
-    max-width: 500px;
-    height: 100vh;
-  }
+  max-width: 500px;
+  height: 100vh;
+}
 
 .login-btn {
   background-color: #4b0dba;
@@ -33,3 +33,22 @@
   color: #7169fe;
 }
 
+.label-style {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #7e8e9f;
+}
+
+.formInputs {
+  height: 3.4rem;
+  width: 100%;
+  font-size: 1rem;
+  padding: 12px 16px;
+  display: block;
+  border: 1px solid #7e8e9f;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}

@@ -6,6 +6,7 @@ const MainLayout = lazy(() => import("Layouts/MainLayout"));
 const MyQueries = lazy(() => import("pages/MyQueries"));
 const CreateQuery = lazy(() => import("pages/CreateQuery"));
 const AuthLayout = lazy(() => import("Layouts/AuthLayout"));
+const ForgotPassword = lazy(() => import("pages/ForgotPassword"));
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,14 @@ const AppRouter = () => {
           element={
             <AuthLayout>
               <SignIn />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <AuthLayout>
+              <ForgotPassword />
             </AuthLayout>
           }
         />

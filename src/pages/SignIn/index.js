@@ -4,7 +4,7 @@ import * as yup from "yup";
 import api from "axiosConfig";
 import { useForm } from "react-hook-form";
 import { loginAction } from "store/actions";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -92,7 +92,9 @@ const SignIn = () => {
           </button>
         </form>
       </div>
-      <div className="row forgot">Forgot Password?</div>
+      <Link to="/forgot-password">
+        <div className="row forgot">Forgot Password?</div>
+      </Link>
     </>
   );
 };
