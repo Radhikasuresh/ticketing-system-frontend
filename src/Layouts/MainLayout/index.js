@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./dashboard.css";
+import "./MainLayout.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutAction } from "store/actions";
 
-const Dashboard = ({ title, children }) => {
+const MainLayout = ({ title, children }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [openPopover, setOpenPopover] = useState(false);
@@ -68,4 +68,4 @@ const Dashboard = ({ title, children }) => {
   );
 };
 
-export default Dashboard;
+export default MainLayout;
