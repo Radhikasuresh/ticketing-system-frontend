@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./createQuery.css";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import api from "axiosConfig";
+import { useSelector } from "react-redux";
 
 const schema = yup.object().shape({
   category: yup.string().required(),
@@ -33,6 +35,8 @@ const schema = yup.object().shape({
 });
 
 const CreateQuery = () => {
+  const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -44,14 +48,19 @@ const CreateQuery = () => {
   });
 
   const onSubmitHandler = async (data) => {
-    console.log("data", data);
-    // try {
-    //   const response = await api.post("/api/users/login", data);
-    //   dispatch(loginAction(response.data));
-    //   reset();
-    // } catch (error) {
-    //   setError("catch", error.response.data);
-    // }
+    try {
+      const response = await api.post("/api/tickets/", data, {
+        headers: {
+          Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+        },
+      });
+      if (response) {
+        reset();
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      setError("catch", error.response.data);
+    }
   };
 
   return (
@@ -212,7 +221,11 @@ const CreateQuery = () => {
                 </div>
                 {/*  */}
                 <div className="d-flex justify-content-end">
-                  <button type="reset" className="btn cancel-btn">
+                  <button
+                    type="reset"
+                    className="btn cancel-btn"
+                    onClick={reset}
+                  >
                     Cancel
                   </button>
                   <div className="lastBtns">
@@ -221,6 +234,11 @@ const CreateQuery = () => {
                     </button>
                   </div>
                 </div>
+                {errors?.catch?.message && (
+                  <div className="alert alert-warning" role="alert">
+                    <span>{errors?.catch?.message}</span>
+                  </div>
+                )}
               </form>
             </div>
           </div>
