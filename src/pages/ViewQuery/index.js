@@ -36,7 +36,7 @@ const Query = () => {
       sender: user.name,
       content: newMessage,
     });
-    setNewMessage(newMessage);
+    setNewMessage("");
   };
 
   return (
@@ -78,17 +78,65 @@ const Query = () => {
                 </button>
               </div>
               <div class="Queries_queries__chat__logs__OSzGU">
-                <div class="Queries_chat__cont__unassigned__eQFIS">
-                  <p
-                  // style="font-size: 1rem;"
-                  >
-                    This query isn't taken up by the mentor yet.
-                  </p>
-                  <img
-                    src="https://www.zenclass.in/images/unassigned_query.svg"
-                    alt="unassigned"
-                  />
-                </div>
+                {messages.length ? (
+                  <>
+                    {messages.map((msg) => {
+                      if (msg.sender === "venky") {
+                        return (
+                          <>
+                            {/* left */}
+                            <div class="Queries_chat__item__3AnjF">
+                              <span>
+                                <img
+                                  src="https://www.zenclass.in/images/userIcon.svg"
+                                  alt="user"
+                                />
+                              </span>
+                              <div class="Queries_chat__content__left__1Breq">
+                                <span>{msg.content}</span>
+                                <div class="Queries_time__data__chat__2p4yq">
+                                  Mar 27, 12:42 PM
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        );
+                      } else {
+                        return (
+                          <>
+                            {/* right */}
+                            <div class="Queries_chat__item__3AnjF">
+                              <div class="Queries_chat__content__right__1a6MY">
+                                <span>{msg.content}</span>
+                                <div class="Queries_time__data__chat__2p4yq">
+                                  Mar 27, 12:43 PM
+                                </div>
+                                <span>
+                                  <img
+                                    src="https://www.zenclass.in/images/userIcon.svg"
+                                    alt="user"
+                                  />
+                                </span>
+                              </div>
+                            </div>
+                          </>
+                        );
+                      }
+                    })}
+                  </>
+                ) : (
+                  <div class="Queries_chat__cont__unassigned__eQFIS">
+                    <p
+                    // style="font-size: 1rem;"
+                    >
+                      This query isn't taken up by the mentor yet.
+                    </p>
+                    <img
+                      src="https://www.zenclass.in/images/unassigned_query.svg"
+                      alt="unassigned"
+                    />
+                  </div>
+                )}
               </div>
               <div class="Queries_queries__chat__actionBar__3yK2_ Queries_actionBar__disable__2d0Al">
                 <div class="Queries_attachment__cont__3kg56">
@@ -103,14 +151,14 @@ const Query = () => {
                     class="Queries_chat__input__28_gq"
                     name="message"
                     placeholder="Send a message"
-                    autocomplete="off"
-                    maxlength="500"
-                    value=""
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
                   />
                   <img
                     src="https://www.zenclass.in/Icons/send.svg"
                     alt="message send icon"
                     class="Queries_send__icon__1ftsf"
+                    onClick={handleSubmit}
                   />
                 </div>
               </div>
@@ -118,6 +166,7 @@ const Query = () => {
             {/* right */}
 
             <div class="Queries_sq__data__14X3m">
+              <button onClick={handleSubmit}>send</button>
               <div class="Queries_queries__data__title__1mVyD">
                 <span>QN41659 - doubt on capstone project</span>
               </div>
