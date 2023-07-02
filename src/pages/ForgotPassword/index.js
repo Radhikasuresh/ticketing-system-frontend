@@ -72,18 +72,18 @@ const ForgotPassword = () => {
     <>
       {isLoading && <h3>Loading...</h3>}
       <form
-        class="col-md-6 mt-2"
+        className="col-md-6 mt-2"
         autocomplete="off"
         onSubmit={handleSubmit(onSubmitHandler)}
       >
-        <div class="form-group mt-2">
-          <label for="email" class="label-style mb-0">
+        <div className="form-group mt-2">
+          <label for="email" className="label-style mb-0">
             Enter Registered Email
           </label>
           <div>
             <input
               {...register("email")}
-              class="formInputs"
+              className="formInputs"
               name="email"
               placeholder="Eg: John@abc.com"
               type="email"
@@ -94,28 +94,28 @@ const ForgotPassword = () => {
         </div>
         {isValidEmail ? (
           <>
-            <div class="form-group mt-2">
-              <label for="password" class="label-style mb-0">
+            <div className="form-group mt-2">
+              <label for="password" className="label-style mb-0">
                 Enter New Password
               </label>
               <div>
                 <input
                   {...register("password")}
-                  class="formInputs"
+                  className="formInputs"
                   name="password"
                   type="password"
                 />
                 <p className="text-danger">{errors.password?.message}</p>
               </div>
             </div>
-            <div class="form-group mt-2">
-              <label for="otp" class="label-style mb-0">
+            <div className="form-group mt-2">
+              <label for="otp" className="label-style mb-0">
                 Enter OTP
               </label>
               <div>
                 <input
                   {...register("otp")}
-                  class="formInputs"
+                  className="formInputs"
                   name="otp"
                   type="text"
                 />
@@ -129,7 +129,7 @@ const ForgotPassword = () => {
 
         <button
           type="submit"
-          class="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
+          className="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
         >
           Submit
         </button>

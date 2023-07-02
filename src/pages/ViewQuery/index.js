@@ -29,7 +29,6 @@ const Query = () => {
     };
     fetchTicket();
   }, [user.token]);
-  console.log("USER", messages);
 
   useEffect(() => {
     if (!socket) return;
@@ -75,75 +74,75 @@ const Query = () => {
           </div>
         </div>
         {/*  */}
-        <div class="Body_body__content__1jKgz">
-          <div class="Queries_query__cont__15HCC">
+        <div className="Body_body__content__1jKgz">
+          <div className="Queries_query__cont__15HCC">
             {/* left */}
-            <div class="Queries_sq__chat__1Q7Yx">
-              <div class="Queries_queries__chat__topBar__yH4Tz">
+            <div className="Queries_sq__chat__1Q7Yx">
+              <div className="Queries_queries__chat__topBar__yH4Tz">
                 <div
-                  class="Queries_query__status__btn__cont__1Gdq0"
+                  className="Queries_query__status__btn__cont__1Gdq0"
                   // style="cursor: pointer;"
                 >
-                  <div class="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
+                  <div className="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
                     Unassigned
                   </div>
                 </div>
                 <button
-                  class="Buttons_colorBtn__2m514"
+                  className="Buttons_colorBtn__2m514"
                   // style="border: 1px solid rgb(6, 170, 68); color: rgb(6, 170, 68); position: relative;"
                 >
                   Appeal Solved
                 </button>
               </div>
-              <div class="Queries_queries__chat__logs__OSzGU">
+              <div className="Queries_queries__chat__logs__OSzGU">
                 {messages.length ? (
                   <>
                     {messages.map((msg) => {
                       if (msg.sender === user.name) {
                         return (
-                          <>
-                            {/* left */}
-                            <div class="Queries_chat__item__3AnjF">
+                          <div
+                            className="Queries_chat__item__3AnjF"
+                            key={msg._id}
+                          >
+                            <span>
+                              <img
+                                src="https://www.zenclass.in/images/userIcon.svg"
+                                alt="user"
+                              />
+                            </span>
+                            <div className="Queries_chat__content__left__1Breq">
+                              <span>{msg.content}</span>
+                              <div className="Queries_time__data__chat__2p4yq">
+                                {formatDate(msg.timestamp)}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            className="Queries_chat__item__3AnjF"
+                            key={msg._id}
+                          >
+                            <div className="Queries_chat__content__right__1a6MY">
+                              <span>{msg.content}</span>
+                              <div className="Queries_time__data__chat__2p4yq">
+                                {formatDate(msg.timestamp)}
+                              </div>
                               <span>
                                 <img
                                   src="https://www.zenclass.in/images/userIcon.svg"
                                   alt="user"
                                 />
                               </span>
-                              <div class="Queries_chat__content__left__1Breq">
-                                <span>{msg.content}</span>
-                                <div class="Queries_time__data__chat__2p4yq">
-                                  {formatDate(msg.timestamp)}
-                                </div>
-                              </div>
                             </div>
-                          </>
-                        );
-                      } else {
-                        return (
-                          <>
-                            {/* right */}
-                            <div class="Queries_chat__item__3AnjF">
-                              <div class="Queries_chat__content__right__1a6MY">
-                                <span>{msg.content}</span>
-                                <div class="Queries_time__data__chat__2p4yq">
-                                  {formatDate(msg.timestamp)}
-                                </div>
-                                <span>
-                                  <img
-                                    src="https://www.zenclass.in/images/userIcon.svg"
-                                    alt="user"
-                                  />
-                                </span>
-                              </div>
-                            </div>
-                          </>
+                          </div>
                         );
                       }
                     })}
                   </>
                 ) : (
-                  <div class="Queries_chat__cont__unassigned__eQFIS">
+                  <div className="Queries_chat__cont__unassigned__eQFIS">
                     <p
                     // style="font-size: 1rem;"
                     >
@@ -156,17 +155,17 @@ const Query = () => {
                   </div>
                 )}
               </div>
-              <div class="Queries_queries__chat__actionBar__3yK2_">
-                <div class="Queries_attachment__cont__3kg56">
+              <div className="Queries_queries__chat__actionBar__3yK2_">
+                <div className="Queries_attachment__cont__3kg56">
                   <img
                     src="https://www.zenclass.in/Icons/attachment.svg"
                     alt="attachment button"
                   />
                 </div>
-                <div class="Queries_chat__input__cont__NH4sz">
+                <div className="Queries_chat__input__cont__NH4sz">
                   <input
                     type="text"
-                    class="Queries_chat__input__28_gq"
+                    className="Queries_chat__input__28_gq"
                     name="message"
                     placeholder="Send a message"
                     value={newMessage}
@@ -175,7 +174,7 @@ const Query = () => {
                   <img
                     src="https://www.zenclass.in/Icons/send.svg"
                     alt="message send icon"
-                    class="Queries_send__icon__1ftsf"
+                    className="Queries_send__icon__1ftsf"
                     onClick={handleSubmit}
                   />
                 </div>
@@ -184,56 +183,58 @@ const Query = () => {
             {/* right */}
 
             {tickets.length ? (
-              <div class="Queries_sq__data__14X3m">
-                <div class="Queries_queries__data__title__1mVyD">
+              <div className="Queries_sq__data__14X3m">
+                <div className="Queries_queries__data__title__1mVyD">
                   <span>{tickets[0].description}</span>
                 </div>
-                <div class="Queries_queries__data__rowFlex__K0khZ">
-                  <div class="Queries_queries__studCont__3fLlU">
-                    <span class="Queries_query__grey__text__8FJZa">
+                <div className="Queries_queries__data__rowFlex__K0khZ">
+                  <div className="Queries_queries__studCont__3fLlU">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Created at:
                     </span>
                     <span>{formatDate(tickets[0].createdAt)}</span>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU">
-                    <span class="Queries_query__grey__text__8FJZa">
+                  <div className="Queries_queries__studCont__3fLlU">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Assigned to:
                     </span>
                     <span>-</span>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                    <span class="Queries_query__grey__text__8FJZa">
+                  <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Description:
                     </span>
                     <span>{tickets[0].description}</span>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                    <span class="Queries_query__grey__text__8FJZa">Tags:</span>
-                    <div class="Queries_query__tags__wrap__IzES2">
-                      <span class="Queries_query__tags__bqDS5">react</span>
+                  <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span className="Queries_query__grey__text__8FJZa">
+                      Tags:
+                    </span>
+                    <div className="Queries_query__tags__wrap__IzES2">
+                      <span className="Queries_query__tags__bqDS5">react</span>
                     </div>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU">
-                    <span class="Queries_query__grey__text__8FJZa">
+                  <div className="Queries_queries__studCont__3fLlU">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Category:
                     </span>
                     <span>{tickets[0].category}</span>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU">
-                    <span class="Queries_query__grey__text__8FJZa">
+                  <div className="Queries_queries__studCont__3fLlU">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Sub-Category:
                     </span>
                     <span>Task</span>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                    <span class="Queries_query__grey__text__8FJZa">
+                  <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span className="Queries_query__grey__text__8FJZa">
                       Preferred Language:
                     </span>
-                    <div class="Queries_query__tags__wrap__IzES2">
+                    <div className="Queries_query__tags__wrap__IzES2">
                       {tickets[0].selectLanguage}
                     </div>
                   </div>
-                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94"></div>
+                  <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94"></div>
                 </div>
               </div>
             ) : (
