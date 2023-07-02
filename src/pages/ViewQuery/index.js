@@ -4,6 +4,7 @@ import { SocketContext } from "context/socketContext";
 import { useSelector } from "react-redux";
 import "./viewQuery.css";
 import api from "axiosConfig";
+import { formatDate } from "utils";
 
 const Query = () => {
   const socket = useContext(SocketContext);
@@ -28,6 +29,7 @@ const Query = () => {
     };
     fetchTicket();
   }, [user.token]);
+  console.log("USER", messages);
 
   useEffect(() => {
     if (!socket) return;
@@ -44,8 +46,6 @@ const Query = () => {
       setMessages(updatedMessages);
     });
   }, [socket]);
-
-  console.log("METADATA", tickets);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ const Query = () => {
                 {messages.length ? (
                   <>
                     {messages.map((msg) => {
-                      if (msg.sender === "venky") {
+                      if (msg.sender === user.name) {
                         return (
                           <>
                             {/* left */}
@@ -113,7 +113,7 @@ const Query = () => {
                               <div class="Queries_chat__content__left__1Breq">
                                 <span>{msg.content}</span>
                                 <div class="Queries_time__data__chat__2p4yq">
-                                  Mar 27, 12:42 PM
+                                  {formatDate(msg.timestamp)}
                                 </div>
                               </div>
                             </div>
@@ -127,7 +127,7 @@ const Query = () => {
                               <div class="Queries_chat__content__right__1a6MY">
                                 <span>{msg.content}</span>
                                 <div class="Queries_time__data__chat__2p4yq">
-                                  Mar 27, 12:43 PM
+                                  {formatDate(msg.timestamp)}
                                 </div>
                                 <span>
                                   <img
@@ -156,7 +156,7 @@ const Query = () => {
                   </div>
                 )}
               </div>
-              <div class="Queries_queries__chat__actionBar__3yK2_ Queries_actionBar__disable__2d0Al">
+              <div class="Queries_queries__chat__actionBar__3yK2_">
                 <div class="Queries_attachment__cont__3kg56">
                   <img
                     src="https://www.zenclass.in/Icons/attachment.svg"
@@ -183,57 +183,62 @@ const Query = () => {
             </div>
             {/* right */}
 
-            <div class="Queries_sq__data__14X3m">
-              <button onClick={handleSubmit}>send</button>
-              <div class="Queries_queries__data__title__1mVyD">
-                <span>QN41659 - doubt on capstone project</span>
-              </div>
-              <div class="Queries_queries__data__rowFlex__K0khZ">
-                <div class="Queries_queries__studCont__3fLlU">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Created at:
-                  </span>
-                  <span>23/06/2023, 12:04 PM</span>
+            {tickets.length ? (
+              <div class="Queries_sq__data__14X3m">
+                <div class="Queries_queries__data__title__1mVyD">
+                  <span>{tickets[0].description}</span>
                 </div>
-                <div class="Queries_queries__studCont__3fLlU">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Assigned to:
-                  </span>
-                  <span>-</span>
-                </div>
-                <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Description:
-                  </span>
-                  <span>doubt on capstone project</span>
-                </div>
-                <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                  <span class="Queries_query__grey__text__8FJZa">Tags:</span>
-                  <div class="Queries_query__tags__wrap__IzES2">
-                    <span class="Queries_query__tags__bqDS5">react</span>
+                <div class="Queries_queries__data__rowFlex__K0khZ">
+                  <div class="Queries_queries__studCont__3fLlU">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Created at:
+                    </span>
+                    <span>{formatDate(tickets[0].createdAt)}</span>
                   </div>
+                  <div class="Queries_queries__studCont__3fLlU">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Assigned to:
+                    </span>
+                    <span>-</span>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Description:
+                    </span>
+                    <span>{tickets[0].description}</span>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span class="Queries_query__grey__text__8FJZa">Tags:</span>
+                    <div class="Queries_query__tags__wrap__IzES2">
+                      <span class="Queries_query__tags__bqDS5">react</span>
+                    </div>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Category:
+                    </span>
+                    <span>{tickets[0].category}</span>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Sub-Category:
+                    </span>
+                    <span>Task</span>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
+                    <span class="Queries_query__grey__text__8FJZa">
+                      Preferred Language:
+                    </span>
+                    <div class="Queries_query__tags__wrap__IzES2">
+                      {tickets[0].selectLanguage}
+                    </div>
+                  </div>
+                  <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94"></div>
                 </div>
-                <div class="Queries_queries__studCont__3fLlU">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Category:
-                  </span>
-                  <span>Zen-Class Doubt</span>
-                </div>
-                <div class="Queries_queries__studCont__3fLlU">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Sub-Category:
-                  </span>
-                  <span>Task</span>
-                </div>
-                <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
-                  <span class="Queries_query__grey__text__8FJZa">
-                    Preferred Language:
-                  </span>
-                  <div class="Queries_query__tags__wrap__IzES2">Tamil</div>
-                </div>
-                <div class="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94"></div>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
