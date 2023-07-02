@@ -10,6 +10,24 @@ const Query = () => {
   const user = useSelector((state) => state.auth.user);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [tickets, setTickets] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchTicket = async () => {
+  //     try {
+  //       const response = await api.get("/api/tickets/getTicket", {
+  //         headers: {
+  //           Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+  //         },
+  //       });
+  //       setTickets(response.data.tickets);
+  //       setSelectedTicket(response.data.tickets[0]);
+  //     } catch (error) {
+  //       console.error("catch", error.response.data);
+  //     }
+  //   };
+  //   fetchTicket();
+  // }, [user.token]);
 
   useEffect(() => {
     if (!socket) return;

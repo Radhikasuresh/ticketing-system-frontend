@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 
 const ForgotPassword = () => {
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -44,16 +45,22 @@ const ForgotPassword = () => {
   const onSubmitHandler = async (data) => {
     try {
       if (isValidEmail) {
+        setLoading(true);
         const response = await api.post("/api/users/resetpassword", {
           email: data.email,
           password: data.password,
           otp: data.otp,
         });
+        setLoading(false);
         if (response) navigate("/queries");
       } else {
+        setLoading(true);
+
         const response = await api.post("/api/users/forgotpassword", {
           email: data.email,
         });
+        setLoading(false);
+
         if (response) setIsValidEmail(true);
       }
     } catch (error) {
@@ -63,6 +70,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+      {isLoading && <h3>Loading...</h3>}
       <form
         class="col-md-6 mt-2"
         autocomplete="off"
