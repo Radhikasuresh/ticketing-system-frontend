@@ -108,7 +108,7 @@ const SignIn = () => {
       <div className="note">
 Login Credentials
  </div>
-<div>
+<div className="notes">
  <><b>Email:</b>  radhikasuresh@yopmail.com</><br></br>
  <><b>Password:</b>  test@yopmail.com</>
  </div>
