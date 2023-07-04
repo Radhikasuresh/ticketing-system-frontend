@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./SignIn.css";
 import * as yup from "yup";
 import api from "axiosConfig";
@@ -7,6 +7,10 @@ import { loginAction } from "store/actions";
 import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from 'react-loader-spinner';
+import ReactLoaderSpinner from 'react-loader-spinner';
+
+
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -41,7 +45,13 @@ const SignIn = () => {
   useEffect(() => {
     if (auth.isAuthenticated) navigate("/queries");
   }, [auth, navigate]);
-
+  const [loading, setLoading] = useState(false);
+  const handleClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
   return (
     <>
       <div className="col-md-6">
@@ -55,7 +65,7 @@ const SignIn = () => {
                 {...register("email")}
                 className="form-control"
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 type="email"
                 required
               />
@@ -71,7 +81,7 @@ const SignIn = () => {
                 className="form-control"
                 name="password"
                 {...register("password")}
-                placeholder="password"
+                placeholder="Password"
                 type="password"
                 required
               />
@@ -90,6 +100,9 @@ const SignIn = () => {
           >
             Login
           </button>
+
+ 
+    
         </form>
       </div>
       <Link to="/forgot-password">
@@ -100,3 +113,6 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+
+
