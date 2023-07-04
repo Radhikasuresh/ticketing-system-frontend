@@ -74,14 +74,14 @@ const SignIn = () => {
           </div>
           <div className="form-group mt-1">
             <label htmlFor="password" className="label-style mb-0">
-              Your Password
+              Password
             </label>
             <div>
               <input
                 className="form-control"
                 name="password"
                 {...register("password")}
-                placeholder="Password"
+                placeholder="Your Password"
                 type="password"
                 required
               />
