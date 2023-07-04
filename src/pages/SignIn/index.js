@@ -65,7 +65,7 @@ const SignIn = () => {
                 {...register("email")}
                 className="form-control"
                 name="email"
-                placeholder="Email"
+                placeholder="Example:johndoe@mail.com"
                 type="email"
                 required
               />
@@ -74,7 +74,7 @@ const SignIn = () => {
           </div>
           <div className="form-group mt-1">
             <label htmlFor="password" className="label-style mb-0">
-              Password
+              Your Password
             </label>
             <div>
               <input
@@ -100,17 +100,25 @@ const SignIn = () => {
           >
             Login
           </button>
-
- 
-    
-        </form>
+</form>
       </div>
       <Link to="/forgot-password">
         <div className="row forgot">Forgot Password?</div>
       </Link>
+      <div className="note">
+Login Credentials
+ </div>
+<div>
+ <><b>Email:</b>  radhikasuresh@yopmail.com</><br></br>
+ <><b>Password:</b>  test@yopmail.com</>
+ </div>
+
+
     </>
+  
   );
 };
+
 
 export default SignIn;
 
