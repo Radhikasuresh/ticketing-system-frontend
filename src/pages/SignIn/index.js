@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./SignIn.css";
 import * as yup from "yup";
 import api from "axiosConfig";
 import { useForm } from "react-hook-form";
@@ -7,8 +6,8 @@ import { loginAction } from "store/actions";
 import { Link, useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
-import Loader from 'react-loader-spinner';
-import ReactLoaderSpinner from 'react-loader-spinner';
+import Loader from "react-loader-spinner";
+
 
 
 
@@ -18,6 +17,9 @@ const schema = yup.object().shape({
 });
 
 const SignIn = () => {
+  const linkStyle = {
+    textDecoration: 'none',
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
@@ -46,12 +48,23 @@ const SignIn = () => {
     if (auth.isAuthenticated) navigate("/queries");
   }, [auth, navigate]);
   const [loading, setLoading] = useState(false);
-  const handleClick = () => {
+  const handleButtonClick = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   };
+  // const [passwordVisible, setPasswordVisible] = useState(false);
+  // const [password, setPassword] = useState('');
+
+  // const togglePasswordVisibility = () => {
+  //   setPasswordVisible(!passwordVisible);
+  // };
+
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // };
+
   return (
     <>
       <div className="col-md-6">
@@ -76,15 +89,18 @@ const SignIn = () => {
             <label htmlFor="password" className="label-style mb-0">
               Password
             </label>
-            <div>
+            <div className="two1">
               <input
                 className="form-control"
                 name="password"
                 {...register("password")}
                 placeholder="Your Password"
-                type="password"
+                // type={passwordVisible ? 'text' : 'password'}
                 required
               />
+              {/* <button className="two" onClick={togglePasswordVisibility}>
+        {passwordVisible ? <FaEyeSlash/> : <FaEye/>}
+      </button> */}
             </div>
             <p className="text-danger">{errors.password?.message}</p>
           </div>
@@ -93,16 +109,20 @@ const SignIn = () => {
               <span>Wrong Password</span>
             </div>
           )}
-
-          <button
-            type="submit"
-            className="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
-          >
-            Login
-          </button>
+          <button 
+          className="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
+          type="submit"
+          onClick={handleButtonClick} 
+         >
+        {loading ? (
+          <Loader type="TailSpin" color="blue" height={30} width={40} />
+        ) : (
+          "Login"
+        )}
+      </button>
 </form>
       </div>
-      <Link to="/forgot-password">
+      <Link to="/forgot-password" style={linkStyle}>
         <div className="row forgot">Forgot Password?</div>
       </Link>
       <div className="note">

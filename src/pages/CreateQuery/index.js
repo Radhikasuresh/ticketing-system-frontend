@@ -123,6 +123,49 @@ const CreateQuery = () => {
                     </select>
                     <p className="text-danger">{errors.category?.message}</p>
                   </div>
+                  <label htmlFor="category" className="label-style mb-0">
+                    Subcategory
+                  </label>
+                  <div>
+                    <select
+                      {...register("category")}
+                      className="formInputs"
+                      name="category"
+                    >
+                      <option label="--- Select Sub Category---"></option>
+                      <option
+                        value="Task"
+                        index="0"
+                        label="Task"
+                      ></option>
+                      <option
+                        value="Webcode"
+                        index="1"
+                        label="Webcode"
+                      ></option>
+                      <option
+                        value="Class Topic"
+                        index="2"
+                        label="Class Topic"
+                      ></option>
+                      <option
+                        value="Webcata"
+                        index="3"
+                        label="Webcata"
+                      ></option>
+                       <option
+                        value="Codecata"
+                        index="3"
+                        label="Codecata"
+                      ></option>
+                       <option
+                        value="Assessment"
+                        index="3"
+                        label="Assessment"
+                      ></option>
+                    </select>
+                    <p className="text-danger">{errors.category?.message}</p>
+                  </div>
                   <label htmlFor="language" className="label-style mb-0">
                     Prefered Voice Communication Language
                   </label>
