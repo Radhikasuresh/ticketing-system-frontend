@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "./viewQuery.css";
 import api from "axiosConfig";
 import { formatDate } from "utils";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const Query = () => {
   const socket = useContext(SocketContext);
@@ -29,6 +30,39 @@ const Query = () => {
     };
     fetchTicket();
   }, [user.token]);
+
+  const ticketAssignUpdate = async () => {
+    try {
+      const response = await api.put(
+        `/api/tickets/${params.id}/assign`,
+        { assign: user?.name },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+          },
+        }
+      );
+      setTickets(response?.data);
+    } catch (error) {
+      console.error("catch", error.response.data);
+    }
+  };
+  const ticketStatusUpdate = async () => {
+    try {
+      const response = await api.put(
+        `/api/tickets/${params.id}/status`,
+        { status: tickets[0]?.status === "Open" ? "Closed" : "Open" },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+          },
+        }
+      );
+      setTickets(response?.data);
+    } catch (error) {
+      console.error("catch", error.response.data);
+    }
+  };
 
   useEffect(() => {
     if (!socket) return;
@@ -79,20 +113,49 @@ const Query = () => {
             {/* left */}
             <div className="Queries_sq__chat__1Q7Yx">
               <div className="Queries_queries__chat__topBar__yH4Tz">
-                <div
-                  className="Queries_query__status__btn__cont__1Gdq0"
-                  // style="cursor: pointer;"
-                >
-                  <div className="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
-                    Unassigned
+                {user?.isAdmin ? (
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      Actions{" "}
+                    </Dropdown.Toggle>
+                    {tickets[0]?.status === "Open" ? (
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => ticketStatusUpdate()}>
+                          Drop
+                        </Dropdown.Item>
+                        {user?.name !== tickets[0]?.assign && (
+                          <Dropdown.Item onClick={() => ticketAssignUpdate()}>
+                            Take up
+                          </Dropdown.Item>
+                        )}
+                      </Dropdown.Menu>
+                    ) : (
+                      <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => ticketStatusUpdate()}>
+                          Reopen
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    )}
+                  </Dropdown>
+                ) : (
+                  ""
+                )}
+                <>
+                  <div
+                    className="Queries_query__status__btn__cont__1Gdq0"
+                    // style="cursor: pointer;"
+                  >
+                    <div className="Queries_query__status__btn__mKjvg Queries_query__status__unassigned__2I66S">
+                      {!tickets[0]?.assign ? "Unassigned" : "Assigned"}
+                    </div>
                   </div>
-                </div>
-                <button
-                  className="Buttons_colorBtn__2m514"
-                  // style="border: 1px solid rgb(6, 170, 68); color: rgb(6, 170, 68); position: relative;"
-                >
-                  Appeal Solved
-                </button>
+                  {/* <button
+                      className="Buttons_colorBtn__2m514"
+                      // style="border: 1px solid rgb(6, 170, 68); color: rgb(6, 170, 68); position: relative;"
+                    >
+                      Appeal Solved
+                    </button> */}
+                </>
               </div>
               <div className="Queries_queries__chat__logs__OSzGU">
                 {messages.length ? (
@@ -198,7 +261,12 @@ const Query = () => {
                     <span className="Queries_query__grey__text__8FJZa">
                       Assigned to:
                     </span>
-                    <span>-</span>
+                    <span>
+                      {" "}
+                      {!tickets[0]?.assign
+                        ? "Unassigned"
+                        : `Assigned to ${tickets[0].assign}`}
+                    </span>
                   </div>
                   <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
                     <span className="Queries_query__grey__text__8FJZa">

@@ -13,11 +13,18 @@ const MyQueries = () => {
   useEffect(() => {
     const fetchTicket = async () => {
       try {
-        const response = await api.get("/api/tickets/getUserTickets", {
-          headers: {
-            Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
-          },
-        });
+        const response = await api.get(
+          `${
+            user?.isAdmin
+              ? "/api/tickets/getAllTickets"
+              : "/api/tickets/getUserTickets"
+          }`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
+            },
+          }
+        );
         setTickets(response.data.tickets);
         setSelectedTicket(response.data.tickets[0]);
       } catch (error) {
@@ -122,7 +129,12 @@ const MyQueries = () => {
                           <span className="Queries_query__grey__text__8FJZa">
                             Assigned to:
                           </span>
-                          <span>-</span>
+                          <span>
+                            {" "}
+                            {!selectedTicket?.assign
+                              ? "Unassigned"
+                              : `Assigned to ${selectedTicket.assign}`}
+                          </span>
                         </div>
                         <div className="Queries_queries__studCont__3fLlU Queries_grid__col2__3UV94">
                           <span className="Queries_query__grey__text__8FJZa">

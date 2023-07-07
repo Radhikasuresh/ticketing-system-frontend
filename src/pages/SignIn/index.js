@@ -8,9 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "react-loader-spinner";
 
-
-
-
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
@@ -18,7 +15,7 @@ const schema = yup.object().shape({
 
 const SignIn = () => {
   const linkStyle = {
-    textDecoration: 'none',
+    textDecoration: "none",
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,11 +32,15 @@ const SignIn = () => {
   });
 
   const onSubmitHandler = async (data) => {
+    setLoading(true);
     try {
       const response = await api.post("/api/users/login", data);
+      setLoading(false);
+
       dispatch(loginAction(response.data));
       reset();
     } catch (error) {
+      setLoading(false);
       setError("catch", error.response.data);
     }
   };
@@ -48,12 +49,7 @@ const SignIn = () => {
     if (auth.isAuthenticated) navigate("/queries");
   }, [auth, navigate]);
   const [loading, setLoading] = useState(false);
-  const handleButtonClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+
   // const [passwordVisible, setPasswordVisible] = useState(false);
   // const [password, setPassword] = useState('');
 
@@ -109,38 +105,33 @@ const SignIn = () => {
               <span>Wrong Password</span>
             </div>
           )}
-          <button 
-          className="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
-          type="submit"
-          onClick={handleButtonClick} 
-         >
-        {loading ? (
-          <Loader type="TailSpin" color="white" height={30} width={40} />
-        ) : (
-          "Login"
-        )}
-      </button>
-</form>
+          <button
+            className="col-md-12 btn btn-lg btn-block login-btn mt-4 mb-4"
+            type="submit"
+          >
+            {loading ? (
+              <Loader type="TailSpin" color="white" height={30} width={40} />
+            ) : (
+              "Login"
+            )}
+          </button>
+        </form>
       </div>
       <Link to="/forgot-password" style={linkStyle}>
         <div className="row forgot">Forgot Password?</div>
       </Link>
-      <div className="note">
-Login Credentials
- </div>
-<div className="notes">
- <><b>Email:</b>  radhikasuresh@yopmail.com</><br></br>
- <><b>Password:</b>  test@yopmail.com</>
- </div>
-
-
+      <div className="note">Login Credentials</div>
+      <div className="notes">
+        <>
+          <b>Email:</b> radhikasuresh@yopmail.com
+        </>
+        <br></br>
+        <>
+          <b>Password:</b> test@yopmail.com
+        </>
+      </div>
     </>
-  
   );
 };
 
-
 export default SignIn;
-
-
-
