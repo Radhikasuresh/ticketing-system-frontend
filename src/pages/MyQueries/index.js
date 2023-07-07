@@ -3,15 +3,18 @@ import { useSelector } from "react-redux";
 import api from "axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 import { formatDate } from "utils";
+import Spinner from "react-bootstrap/Spinner";
 
 const MyQueries = () => {
   const user = useSelector((state) => state.auth.user);
   const [tickets, setTickets] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(tickets[0]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTicket = async () => {
+      setLoading(true);
       try {
         const response = await api.get(
           `${
@@ -25,9 +28,11 @@ const MyQueries = () => {
             },
           }
         );
+        setLoading(false);
         setTickets(response.data.tickets);
         setSelectedTicket(response.data.tickets[0]);
       } catch (error) {
+        setLoading(false);
         console.error("catch", error.response.data);
       }
     };
@@ -60,6 +65,7 @@ const MyQueries = () => {
           </div>
         </div>
         <div className="Body_body__content__1jKgz">
+          <center>{loading && <Spinner animation="border" size="lg" />}</center>
           <div className="Queries_sq__home__cont__2LKRX ">
             {tickets ? (
               <>

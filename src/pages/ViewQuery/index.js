@@ -6,6 +6,7 @@ import "./viewQuery.css";
 import api from "axiosConfig";
 import { formatDate } from "utils";
 import Dropdown from "react-bootstrap/Dropdown";
+import Spinner from "react-bootstrap/Spinner";
 
 const Query = () => {
   const socket = useContext(SocketContext);
@@ -14,17 +15,21 @@ const Query = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [tickets, setTickets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTicket = async () => {
+      setLoading(true);
       try {
         const response = await api.get(`/api/tickets/getTicket/${params.id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`, // Replace `token` with your actual token variable
           },
         });
+        setLoading(false);
         setTickets(response?.data);
       } catch (error) {
+        setLoading(false);
         console.error("catch", error.response.data);
       }
     };
@@ -109,6 +114,7 @@ const Query = () => {
         </div>
         {/*  */}
         <div className="Body_body__content__1jKgz">
+          <center>{loading && <Spinner animation="border" size="lg" />}</center>
           <div className="Queries_query__cont__15HCC">
             {/* left */}
             <div className="Queries_sq__chat__1Q7Yx">
