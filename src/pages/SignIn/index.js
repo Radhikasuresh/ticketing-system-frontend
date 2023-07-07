@@ -115,7 +115,7 @@ const SignIn = () => {
           onClick={handleButtonClick} 
          >
         {loading ? (
-          <Loader type="TailSpin" color="blue" height={30} width={40} />
+          <Loader type="TailSpin" color="white" height={30} width={40} />
         ) : (
           "Login"
         )}
