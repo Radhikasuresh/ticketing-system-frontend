@@ -1,6 +1,6 @@
 .note{
-   margin-top: 170px;
-   margin-left: 600px;
+   margin-top: 100px;
+   margin-left: 500px;
    font-weight: bold;
    font-size: 22px;
    color: gray;
@@ -11,14 +11,15 @@ b{
     font-family:Arial, Helvetica, sans-serif;
 }
 .notes{
-    margin-left: 600px;
+    margin-left: 500px;
 }
-/* .two{
- 
-    border: 1px solid white;
-    background-color: white;
+.note1{
+    margin-left: 500px;
+    font-weight: bold;
+    font-size: 22px;
+    color: gray;
+    font-family:Arial, Helvetica, sans-serif;
 }
-.two1{
-    display: flex;
-    position: relative;
-} */
+.notes1{
+    margin-left: 500px;
+}
