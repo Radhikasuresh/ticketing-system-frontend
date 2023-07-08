@@ -54,16 +54,6 @@ const SignIn = () => {
       setLoading(false);
     }, 2000);
   };
-  // const [passwordVisible, setPasswordVisible] = useState(false);
-  // const [password, setPassword] = useState('');
-
-  // const togglePasswordVisibility = () => {
-  //   setPasswordVisible(!passwordVisible);
-  // };
-
-  // const handlePasswordChange = (e) => {
-  //   setPassword(e.target.value);
-  // };
 
   return (
     <>
@@ -95,12 +85,9 @@ const SignIn = () => {
                 name="password"
                 {...register("password")}
                 placeholder="Your Password"
-                // type={passwordVisible ? 'text' : 'password'}
+                type='password'
                 required
               />
-              {/* <button className="two" onClick={togglePasswordVisibility}>
-        {passwordVisible ? <FaEyeSlash/> : <FaEye/>}
-      </button> */}
             </div>
             <p className="text-danger">{errors.password?.message}</p>
           </div>
@@ -126,10 +113,17 @@ const SignIn = () => {
         <div className="row forgot">Forgot Password?</div>
       </Link>
       <div className="note">
-Login Credentials
+User Credentials
  </div>
 <div className="notes">
  <><b>Email:</b>  radhikasuresh@yopmail.com</><br></br>
+ <><b>Password:</b>  test@yopmail.com</>
+ </div>
+ <div className="note1">
+Admin Credentials
+ </div>
+<div className="notes1">
+ <><b>Email:</b>  venkyiv@yopmail.com</><br></br>
  <><b>Password:</b>  test@yopmail.com</>
  </div>
 
